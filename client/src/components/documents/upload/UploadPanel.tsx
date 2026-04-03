@@ -91,7 +91,7 @@ export function UploadPanel({
         <input
           ref={inputRef}
           type="file"
-          accept=".pdf,.epub,application/pdf,application/epub+zip"
+          accept=".epub,application/epub+zip"
           className="hidden"
           onChange={onFileChange}
         />
