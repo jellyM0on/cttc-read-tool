@@ -20,6 +20,7 @@ export async function saveLocalDocument(file: File): Promise<LocalDocumentRecord
     cover: metadata.cover,
     file_type: "epub",
     created_at: new Date().toISOString(),
+    source: "local",
     file,
   };
 

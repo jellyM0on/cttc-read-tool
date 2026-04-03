@@ -1,4 +1,10 @@
+import { useEffect, useState } from "react";
+import { UploadPanel } from "../../components/documents/upload/UploadPanel";
 import { NavBar } from "../../components/shared/NavBar";
+import { useAuth } from "../../context/useAuth";
+import { getLocalDocuments } from "../../lib/localApi/getLocalDocuments";
+import { saveLocalDocument } from "../../lib/localApi/saveLocalDocument";
+import type { StoredDocument } from "../../types/documents";
 
 function HeroSection() {
   return (
@@ -19,17 +25,90 @@ function HeroSection() {
 }
 
 export function HomePage() {
+  const { isAuthenticated } = useAuth();
+
+  const [documents, setDocuments] = useState<StoredDocument[]>([]);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function loadDocuments() {
+      try {
+        //TODO: add remote fetch
+        if (!isAuthenticated) {
+          const localDocs = await getLocalDocuments();
+
+          setDocuments(
+            localDocs.map((doc) => ({
+              id: doc.id,
+              title: doc.title,
+              author: doc.author,
+              cover: doc.cover,
+              file_type: doc.file_type,
+              created_at: doc.created_at,
+              source: doc.source,
+              progress: 0, //TODO
+            }))
+          );
+          return;
+        }
+    
+      } catch (error) {
+        setUploadError(
+          error instanceof Error ? error.message : "Failed to load documents"
+        );
+      }
+    }
+
+    loadDocuments();
+  }, [isAuthenticated]);
+
+  const handleUpload = async (file: File) => {
+    setUploadError(null);
+    setIsUploading(true);
+
+    try {
+      //TODO: add remote save
+      if (!isAuthenticated) {
+         const saved = await saveLocalDocument(file);
+
+        setDocuments((prev) => [
+          {
+            id: saved.id,
+            title: saved.title,
+            author: saved.author,
+            cover: saved.cover,
+            file_type: saved.file_type,
+            created_at: saved.created_at,
+            source: "local",
+            progress: 0,
+          },
+          ...prev,
+        ]);
+      } 
+    } catch (error) {
+      setUploadError(error instanceof Error ? error.message : "Upload failed");
+    } finally {
+      setIsUploading(false);
+    }
+  };
 
   return (
     <>
-      <NavBar/>
+      <NavBar />
       <main className="min-h-screen bg-(--surface) text-(--on-surface)">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-14 px-6 py-8 lg:px-8 lg:py-10">
           <HeroSection />
+
+          <section className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,1.5fr)_minmax(280px,0.8fr)]">
+            <UploadPanel
+              onUpload={handleUpload}
+              isUploading={isUploading}
+              error={uploadError}
+            />
+          </section>
         </div>
       </main>
     </>
-   
   );
 }
-
