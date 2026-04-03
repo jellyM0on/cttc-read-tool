@@ -1,4 +1,4 @@
-import { type LocalDocumentRecord } from "../../types/documents";
+import type { LocalDocumentRecord } from "../../types/documents";
 import { config } from "./_config";
 import { openDatabase } from "./_utils";
 
