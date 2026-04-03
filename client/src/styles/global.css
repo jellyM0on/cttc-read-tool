@@ -1,5 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Newsreader:wght@400;500;600&display=swap");
 @import "tailwindcss";
+
+
+:root {
+  --font-ui: "Manrope", sans-serif;
+  --font-reading: "Newsreader", serif;
+}
 
 *,
 *::before,
@@ -13,135 +19,7 @@ body,
   min-height: 100%;
 }
 
-html {
-  color-scheme: light;
-}
-
 body {
   margin: 0;
-  background: var(--surface);
-  color: var(--on-surface);
   font-family: var(--font-ui);
-  line-height: var(--line-ui);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body,
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-img,
-svg,
-video,
-canvas {
-  display: block;
-  max-width: 100%;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-::selection {
-  background: rgba(67, 97, 238, 0.18);
-}
-
-/* Typography helpers */
-.text-display {
-  font-family: var(--font-ui);
-  font-size: var(--text-display-lg);
-  line-height: 1.05;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-}
-
-.text-headline {
-  font-family: var(--font-ui);
-  font-size: var(--text-headline-md);
-  line-height: 1.15;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-.text-title {
-  font-family: var(--font-reading);
-  font-size: var(--text-title-lg);
-  line-height: 1.2;
-  font-weight: 500;
-}
-
-.text-reading {
-  font-family: var(--font-reading);
-  font-size: var(--text-body-lg);
-  line-height: var(--line-reading);
-  color: var(--on-surface);
-}
-
-.text-label {
-  font-family: var(--font-ui);
-  font-size: var(--text-label-md);
-  line-height: 1.3;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  text-transform: none;
-}
-
-.text-muted {
-  color: var(--on-surface-muted);
-}
-
-/* Utilities */
-.surface-base {
-  background: var(--surface);
-}
-
-.surface-low {
-  background: var(--surface-container-low);
-}
-
-.surface-high {
-  background: var(--surface-container-high);
-}
-
-.surface-highest {
-  background: var(--surface-container-highest);
-}
-
-.glass {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: var(--shadow-cloud);
-}
-
-.ghost-border {
-  border: 1px solid var(--outline-ghost);
-}
-
-.rounded-lg {
-  border-radius: var(--radius-lg);
-}
-
-.rounded-xl {
-  border-radius: var(--radius-xl);
-}
-
-.rounded-2xl {
-  border-radius: var(--radius-2xl);
-}
-
-/* No-line rule */
-.no-divider {
-  border: none !important;
-  outline: none;
 }
