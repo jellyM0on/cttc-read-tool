@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { LibrarySection } from "../../components/documents/lists/DocumentList";
 import { UploadPanel } from "../../components/documents/upload/UploadPanel";
 import { NavBar } from "../../components/shared/NavBar";
 import { useAuth } from "../../context/useAuth";
@@ -80,8 +81,8 @@ export function HomePage() {
             cover: saved.cover,
             file_type: saved.file_type,
             created_at: saved.created_at,
-            source: "local",
-            progress: 0,
+            source: saved.source,
+            progress: 0, //TODO
           },
           ...prev,
         ]);
@@ -107,6 +108,8 @@ export function HomePage() {
               error={uploadError}
             />
           </section>
+
+          <LibrarySection docs={documents} />
         </div>
       </main>
     </>
