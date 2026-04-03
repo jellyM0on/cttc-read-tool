@@ -6,6 +6,8 @@ import { useAuth } from "../../context/useAuth";
 import { getLocalDocuments } from "../../lib/localApi/getLocalDocuments";
 import { saveLocalDocument } from "../../lib/localApi/saveLocalDocument";
 import type { StoredDocument } from "../../types/documents";
+import { ReadingStreakCard } from "../../components/stats/ReadingStreakCard";
+import { WordsSavedCard } from "../../components/stats/WordsSavedCard";
 
 function HeroSection() {
   return (
@@ -107,6 +109,11 @@ export function HomePage() {
               isUploading={isUploading}
               error={uploadError}
             />
+
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-1">
+              <WordsSavedCard/>
+              <ReadingStreakCard/>
+            </div>
           </section>
 
           <LibrarySection docs={documents} />
