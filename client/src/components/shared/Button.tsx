@@ -26,7 +26,7 @@ export function Button({
     <button
       className={clsx(
         "rounded-xl border-0 px-4 py-3 font-semibold transition-all duration-150",
-        "font-(--font-ui) focus:outline-none",
+        "[font-family:var(--font-ui)] focus:outline-none",
         variantClasses[variant],
         className
       )}
