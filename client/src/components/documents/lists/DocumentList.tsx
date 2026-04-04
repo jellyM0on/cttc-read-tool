@@ -1,31 +1,92 @@
 import type { StoredDocument } from "../../../types/documents";
 import { DocumentCard } from "./DocumentCard";
 
-export function LibrarySection({ docs }: { docs: StoredDocument[] }) {
-  return (
-    <section className="space-y-8">
-      <div className="max-w-2xl">
-        <h2 className="[font-family:var(--font-ui)] text-3xl font-semibold tracking-[-0.02em] text-(--on-surface)">
-          Your Books
-        </h2>
-        <p className="mt-2 [font-family:var(--font-ui)] text-sm leading-7 text-(--on-surface-muted)">
-          Pick up where you left off, revisit older uploads, or open a newer text.
+export function LibrarySection({ docs, hasPagination = false }: { docs: StoredDocument[], hasPagination?: boolean }) {
+  if (docs.length === 0) {
+    return (
+      <div className="rounded-xl bg-(--surface-container-low) px-8 py-16 text-center">
+        <p className="[font-family:var(--font-ui)] text-sm text-(--on-surface-muted)">
+          No documents in your collection yet.
         </p>
       </div>
+    );
+  }
 
-      {docs.length === 0 ? (
-        <div className="rounded-4xl bg-[rgba(255,255,255,0.72)] p-8 text-center shadow-[0_12px_32px_rgba(28,28,24,0.06)]">
-          <p className="[font-family:var(--font-ui)] text-sm text-(--on-surface-muted)">
-            No uploads yet. Add your first EPUB to begin building your library.
-          </p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 2xl:grid-cols-3">
-          {docs.map((doc) => (
-            <DocumentCard key={doc.id} doc={doc} />
-          ))}
-        </div>
-      )}
-    </section>
+  return (
+    <>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 2xl:grid-cols-3">
+        {docs.map((doc) => (
+          <DocumentCard key={doc.id} doc={doc} />
+        ))}
+      </div>
+    
+        {hasPagination && (
+          <div className="mt-16 flex items-center justify-center gap-2">
+            <button
+              type="button"
+              className="flex items-center gap-1 px-4 py-2 [font-family:var(--font-ui)] text-xs font-bold text-[rgba(28,28,24,0.4)] transition-colors hover:text-(--primary)"
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+              >
+                <path d="m15 18-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              Previous
+            </button>
+
+            <div className="flex items-center gap-1">
+              <button
+                type="button"
+                className="flex h-9 w-9 items-center justify-center rounded-lg bg-(--primary) text-white [font-family:var(--font-ui)] text-xs font-bold"
+              >
+                1
+              </button>
+              <button
+                type="button"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-[rgba(28,28,24,0.6)] transition-colors hover:bg-(--surface-container-low) [font-family:var(--font-ui)] text-xs font-bold"
+              >
+                2
+              </button>
+              <button
+                type="button"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-[rgba(28,28,24,0.6)] transition-colors hover:bg-(--surface-container-low) [font-family:var(--font-ui)] text-xs font-bold"
+              >
+                3
+              </button>
+              <span className="flex h-9 w-9 items-center justify-center text-[rgba(28,28,24,0.3)] [font-family:var(--font-ui)] text-xs font-bold">
+                ...
+              </span>
+              <button
+                type="button"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-[rgba(28,28,24,0.6)] transition-colors hover:bg-(--surface-container-low) [font-family:var(--font-ui)] text-xs font-bold"
+              >
+                12
+              </button>
+            </div>
+
+            <button
+              type="button"
+              className="flex items-center gap-1 px-4 py-2 [font-family:var(--font-ui)] text-xs font-bold text-[rgba(28,28,24,0.6)] transition-colors hover:text-(--primary)"
+            >
+              Next
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+              >
+                <path d="m9 18 6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </div>
+        )}
+    </>
   );
 }
