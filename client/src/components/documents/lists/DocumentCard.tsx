@@ -76,7 +76,7 @@ export function DocumentCard({ doc }: { doc: StoredDocument }) {
               </span>
 
               <Link
-                to={`/reader/${doc.id}`}
+                to={`/library/${doc.id}`}
                 className="rounded-full bg-(--primary) px-4 py-2 [font-family:var(--font-ui)] text-xs font-bold text-white transition-all hover:-translate-y-0.5"
               >
                 Open

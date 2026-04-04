@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { LibrarySection } from "../../components/documents/lists/DocumentList";
 import { UploadPanel } from "../../components/documents/upload/UploadPanel";
 import { NavBar } from "../../components/shared/NavBar";
+import { ReadingStreakCard } from "../../components/stats/ReadingStreakCard";
+import { WordsSavedCard } from "../../components/stats/WordsSavedCard";
 import { useAuth } from "../../context/useAuth";
 import { getLocalDocuments } from "../../lib/localApi/getLocalDocuments";
 import { saveLocalDocument } from "../../lib/localApi/saveLocalDocument";
 import type { StoredDocument } from "../../types/documents";
-import { ReadingStreakCard } from "../../components/stats/ReadingStreakCard";
-import { WordsSavedCard } from "../../components/stats/WordsSavedCard";
 
 function HeroSection() {
   return (
@@ -116,7 +117,37 @@ export function HomePage() {
             </div>
           </section>
 
-          <LibrarySection docs={documents} />
+          <div className="flex flex-col gap-6">
+            <div className="flex items-end justify-between">
+              <div className="max-w-2xl">
+                <h2 className="[font-family:var(--font-reading)] text-3xl font-semibold tracking-[-0.02em] text-(--on-surface)">
+                  Recent Books
+                </h2>
+                <p className="mt-2 [font-family:var(--font-ui)] text-sm leading-7 text-(--on-surface-muted)">
+                  Pick up where you left off, revisit older uploads, or open a newer text.
+                </p>
+              </div>
+
+              <Link
+                to="/library"
+                className="flex items-center gap-2 [font-family:var(--font-ui)] text-sm font-semibold text-(--primary) transition-opacity hover:opacity-80"
+              >
+                <span>View all</span>
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                >
+                  <path d="m9 6 6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
+            </div>
+
+            <LibrarySection docs={documents} />
+          </div>
         </div>
       </main>
     </>

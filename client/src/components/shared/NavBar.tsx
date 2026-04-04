@@ -34,6 +34,16 @@ export function NavBar() {
             >
               Home
             </Link>
+             <Link
+              to="/library"
+              className={`[font-family:var(--font-ui)] text-sm font-semibold transition-colors ${
+                isActive("/library")
+                  ? "border-b-2 border-(--primary) text-(--primary)"
+                  : "border-b-2 border-transparent text-(--on-surface-muted) hover:text-(--primary)"
+              }`}
+            >
+              Library
+            </Link>
           </div>
         </div>
 
@@ -104,6 +114,17 @@ export function NavBar() {
                 }`}
               >
                 Home
+              </Link>
+
+              <Link
+                to="/library"
+                className={`[font-family:var(--font-ui)] text-sm font-semibold transition-colors ${
+                  isActive("/library")
+                    ? "border-b-2 border-(--primary) text-(--primary)"
+                    : "border-b-2 border-transparent text-(--on-surface-muted) hover:text-(--primary)"
+                }`}
+              >
+                Library
               </Link>
             </div>
 
