@@ -1,6 +1,6 @@
 
 import type { LocalDocumentRecord } from "../../types/documents";
-import { extractEpubMetadata } from "../epub/extractEpubMetadata";
+import { extractEpubMetadata } from "../epub/extractEpubMetadata-v2";
 import { config } from "./_config";
 import { openDatabase } from "./_utils";
 
