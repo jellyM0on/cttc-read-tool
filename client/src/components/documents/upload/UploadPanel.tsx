@@ -4,18 +4,30 @@ import {
   type ChangeEvent,
   type DragEvent,
 } from "react";
+import { UploadButton } from "./UploadButton";
+
+type UploadPanelProps = {
+  onUpload: (file: File) => Promise<void>;
+  isUploading: boolean;
+  error: string | null;
+  acceptedTypes?: string[];
+  accept?: string;
+};
 
 export function UploadPanel({
   onUpload,
   isUploading,
   error,
-}: {
-  onUpload: (file: File) => Promise<void>;
-  isUploading: boolean;
-  error: string | null;
-}) {
+  acceptedTypes = ["EPUB"],
+  accept = ".epub,application/epub+zip",
+}: UploadPanelProps) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+
+  const openFilePicker = () => {
+    if (isUploading) return;
+    inputRef.current?.click();
+  };
 
   const handleFile = async (file: File | null | undefined) => {
     if (!file || isUploading) return;
@@ -58,7 +70,7 @@ export function UploadPanel({
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         onDrop={onDrop}
-        onClick={() => !isUploading && inputRef.current?.click()}
+        onClick={openFilePicker}
         className={`flex h-full cursor-pointer flex-col items-center justify-center rounded-3xl border border-dashed px-6 py-12 text-center transition-all ${
           isDragging
             ? "border-(--primary) bg-[rgba(186,195,255,0.18)]"
@@ -78,7 +90,7 @@ export function UploadPanel({
         </p>
 
         <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-          {["EPUB"].map((type) => (
+          {acceptedTypes.map((type) => (
             <span
               key={type}
               className="rounded-xl bg-(--surface-container-high) px-4 py-2 [font-family:var(--font-ui)] text-[11px] font-bold uppercase tracking-[0.16em] text-(--on-surface-muted)"
@@ -91,22 +103,21 @@ export function UploadPanel({
         <input
           ref={inputRef}
           type="file"
-          accept=".epub,application/epub+zip"
+          accept={accept}
           className="hidden"
           onChange={onFileChange}
         />
 
-        <button
-          type="button"
-          disabled={isUploading}
+        <div
+          className="mt-8"
           onClick={(event) => {
             event.stopPropagation();
-            inputRef.current?.click();
           }}
-          className="mt-8 cursor-pointer rounded-xl bg-(image:--gradient-primary) px-5 py-3 [font-family:var(--font-ui)] text-sm font-bold text-white transition-all hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {isUploading ? "Uploading..." : "Choose File"}
-        </button>
+          <UploadButton disabled={isUploading} onClick={openFilePicker}>
+            {isUploading ? "Uploading..." : "Choose File"}
+          </UploadButton>
+        </div>
 
         {isDragging ? (
           <p className="mt-4 text-sm text-(--primary)">Drop file to upload</p>
