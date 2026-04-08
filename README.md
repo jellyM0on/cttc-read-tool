@@ -22,6 +22,12 @@ This version is the UI Prototype and does not have fully functional features yet
 - React TS, Tailwind
 - IndexedDB
 
+### Interactive Prototype Demo
+
+
+https://github.com/user-attachments/assets/8d3ffa6b-6f17-4d9e-bb49-c3f7d8bf3881
+
+
 ### Documentation
 - Home
 <img width="1000" height="500" alt="Screenshot 2026-04-08 at 23 27 33" src="https://github.com/user-attachments/assets/405a28df-fc2c-4196-a288-6b7fca9a2853" />
