@@ -6,8 +6,8 @@ import { NavBar } from "../../components/shared/NavBar";
 import { ReadingStreakCard } from "../../components/stats/ReadingStreakCard";
 import { WordsSavedCard } from "../../components/stats/WordsSavedCard";
 import { useAuth } from "../../context/useAuth";
-import { getLocalDocuments } from "../../lib/localApi/getLocalDocuments";
-import { saveLocalDocument } from "../../lib/localApi/saveLocalDocument";
+import { getLocalDocuments } from "../../lib/localApi/documents/getLocalDocuments";
+import { saveLocalDocument } from "../../lib/localApi/documents/saveLocalDocument";
 import type { StoredDocument } from "../../types/documents";
 
 function HeroSection() {

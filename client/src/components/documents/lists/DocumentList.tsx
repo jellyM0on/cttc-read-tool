@@ -12,10 +12,12 @@ export function LibrarySection({ docs, hasPagination = false }: { docs: StoredDo
     );
   }
 
+  const visibleDocs = hasPagination ? docs : docs.slice(0, 3);
+
   return (
     <>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 2xl:grid-cols-3">
-        {docs.map((doc) => (
+        {visibleDocs.map((doc) => (
           <DocumentCard key={doc.id} doc={doc} />
         ))}
       </div>

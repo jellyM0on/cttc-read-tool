@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { deleteLocalDocument } from "../../../lib/localApi/deleteLocalDocument";
+import { deleteLocalDocument } from "../../../lib/localApi/documents/deleteLocalDocument";
 import type { StoredDocument } from "../../../types/documents";
 
 function formatDate(dateString: string) {

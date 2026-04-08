@@ -1,8 +1,8 @@
 
-import type { LocalDocumentRecord } from "../../types/documents";
-import { extractEpubMetadata } from "../epub/extractEpubMetadata-v2";
-import { config } from "./_config";
-import { openDatabase } from "./_utils";
+import type { LocalDocumentRecord } from "../../../types/documents";
+import { extractEpubMetadata } from "../../epub/extractEpubMetadata-v2";
+import { config } from "../_config";
+import { openDatabase } from "../_utils";
 
 export async function saveLocalDocument(file: File): Promise<LocalDocumentRecord> {
   const extension = file.name.split(".").pop()?.toLowerCase();
@@ -27,8 +27,8 @@ export async function saveLocalDocument(file: File): Promise<LocalDocumentRecord
   const db = await openDatabase(config);
 
   return new Promise((resolve, reject) => {
-    const tx = db.transaction(config.STORE_NAME, "readwrite");
-    const store = tx.objectStore(config.STORE_NAME);
+    const tx = db.transaction(config.DOC_STORE_NAME, "readwrite");
+    const store = tx.objectStore(config.DOC_STORE_NAME);
     const request = store.put(record);
 
     request.onsuccess = () => resolve(record);

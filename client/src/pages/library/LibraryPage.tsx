@@ -3,7 +3,7 @@ import { LibrarySection } from "../../components/documents/lists/DocumentList";
 import { UploadButton } from "../../components/documents/upload/UploadButton";
 import { NavBar } from "../../components/shared/NavBar";
 import { useAuth } from "../../context/useAuth";
-import { getLocalDocuments } from "../../lib/localApi/getLocalDocuments";
+import { getLocalDocuments } from "../../lib/localApi/documents/getLocalDocuments";
 import type { StoredDocument } from "../../types/documents";
 
 export function LibraryPage() {
