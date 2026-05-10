@@ -11,7 +11,7 @@ type EpubManifestItem = {
   href: string;
   mediaType: string;
   properties?: string;
-};
+}; 
 
 type EpubSpineItem = {
   idref: string;
